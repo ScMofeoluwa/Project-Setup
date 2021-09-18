@@ -2,10 +2,10 @@ from os import stat
 
 from fastapi import FastAPI, HTTPException, Response, status
 from fastapi.params import Depends
+from repository.database import SessionLocal, engine
 from sqlalchemy.orm import Session
 
 from . import models, schemas
-from .database import SessionLocal, engine
 
 app = FastAPI()
 
