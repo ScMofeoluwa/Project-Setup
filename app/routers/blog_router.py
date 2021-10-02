@@ -13,7 +13,7 @@ get_db = database.get_db
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create(request: blog_interface.Blog, db: Session = Depends(get_db)):
-    new_blog = models.Blog(title=request.title, body=request.body)
+    new_blog = blog_entity.Blog(title=request.title, body=request.body)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
@@ -22,7 +22,7 @@ def create(request: blog_interface.Blog, db: Session = Depends(get_db)):
 
 @router.get("/")
 def all(db: Session = Depends(get_db)):
-    blogs = db.query(models.Blog).all()
+    blogs = db.query(blog_entity.Blog).all()
     return blogs
 
 
